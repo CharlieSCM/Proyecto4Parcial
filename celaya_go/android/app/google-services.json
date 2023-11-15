@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "555240604749",
+    "project_id": "celayago-a1427",
+    "storage_bucket": "celayago-a1427.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555240604749:android:7ce91ff923ad4e6b2dc804",
+        "android_client_info": {
+          "package_name": "com.example.celaya_go"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5W13lELLn7m89k8jolzp_5VdCkeqG5Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

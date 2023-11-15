@@ -1,4 +1,4 @@
-import 'dart:html';
+/*import 'dart:html';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class EmailAuth{
@@ -30,4 +30,4 @@ class EmailAuth{
       }
     }
 
-}
+}*/

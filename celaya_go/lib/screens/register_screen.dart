@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 //import 'package:celaya_go/screens/register_screen.dart';
 import 'package:celaya_go/firebase/email_auth.dart';
 
@@ -40,4 +40,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-}
+}*/
