@@ -28,14 +28,19 @@ class DatabaseHelper {
   //se debe acomodar la base de datos
   FutureOr<void> _createTables(Database db, int version)  {
     String query='''
-      CREATE TABLE markers(
+      CREATE TABLE markers (
         id INTEGER PRIMARY KEY,
-        latitude REAL,
-        longitude REAL,
+        latitude TEXT,
+        longitude TEXT,
         title TEXT
       )
     ''';
     db.execute(query);
+  }
+
+  Future<int> INSERT(String tblName, Map<String,dynamic> markerData) async {
+    var conexion = await database;
+    return conexion!.insert(tblName, markerData);
   }
 
   Future<void> insertMarker(Map<String, dynamic> markerData) async {
@@ -60,40 +65,3 @@ class DatabaseHelper {
         where: 'id = ?', whereArgs: [updatedMarker['id']]);
   }
 }
-
-
-/*import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-
-class DatabaseHelper {
-  late Database _database;
-
-  Future<Database> get database async {
-    if (_database != null) return _database;
-
-    _database = await initDatabase();
-    return _database;
-  }
-
-  Future<Database> initDatabase() async {
-    return openDatabase(
-      join(await getDatabasesPath(), 'markers_database.db'),
-      onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE markers(id INTEGER PRIMARY KEY, latitude REAL, longitude REAL, title TEXT)',
-        );
-      },
-      version: 1,
-    );
-  }
-
-  Future<void> insertMarker(Map<String, dynamic> markerData) async {
-    final db = await database;
-    await db.insert('markers', markerData, conflictAlgorithm: ConflictAlgorithm.replace);
-  }
-
-  Future<List<Map<String, dynamic>>> getMarkers() async {
-    final db = await database;
-    return db.query('markers');
-  }
-}*/
