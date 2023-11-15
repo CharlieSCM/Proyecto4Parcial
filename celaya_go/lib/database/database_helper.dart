@@ -25,7 +25,7 @@ class DatabaseHelper {
       onCreate: _createTables
     );
   }
-
+  //se debe acomodar la base de datos
   FutureOr<void> _createTables(Database db, int version)  {
     String query='''
       CREATE TABLE markers(
