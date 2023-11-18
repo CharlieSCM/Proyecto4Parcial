@@ -20,8 +20,11 @@ dependencies:
   sqflite_common: '^2.5.0+1'
   lottie: ^2.6.0
   day_night_switcher: ^0.2.0+1
+  path: ^1.8.3
+  persistent_bottom_nav_bar: ^5.0.2
   flutter:
     sdk: flutter
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -31,5 +34,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/.
-  - lib/assets/.
+     - assets/
+     - lib/assets/

@@ -48,7 +48,9 @@
 //       _markers = markers.map((marker) {
 //         return Marker(
 //           markerId: MarkerId(marker['id'].toString()),
-//           position: LatLng(marker['latitude'], marker['longitude']),
+//           position: LatLng(double.parse(marker['latitude']),
+//               double.parse(marker['longitude'])),
+//           //position: LatLng(marker['latitude'], marker['longitude']), //la porqueria ya no jalo porque se le dio un pub get y se actualizo :/
 //           infoWindow: InfoWindow(title: marker['title']),
 //         );
 //       }).toSet();
@@ -56,64 +58,62 @@
 //   }
 
 //   Future<void> _addMarker(LatLng position, String title) async {
-//   final MarkerId markerId = MarkerId(position.toString());
+//     final MarkerId markerId = MarkerId(position.toString());
 
-//   // Extraer los valores de la posición
-//   double latitude = position.latitude;
-//   double longitude = position.longitude;
+//     // Extraer los valores de la posición
+//     double latitude = position.latitude;
+//     double longitude = position.longitude;
 
-//   final Marker marker = Marker(
-//     markerId: markerId,
-//     position: position,
-//     infoWindow: InfoWindow(title: title),
-//   );
+//     final Marker marker = Marker(
+//       markerId: markerId,
+//       position: position,
+//       infoWindow: InfoWindow(title: title),
+//     );
 
-//   setState(() {
-//     _markers.add(marker);
-//   });
+//     setState(() {
+//       _markers.add(marker);
+//     });
 
-//   // Guardar el marcador en la base de datos con valores extraídos
-//   await _databaseHelper.insertMarker({
-//     'id': markerId.value,
-//     'latitude': latitude,
-//     'longitude': longitude,
-//     'title': title,
-//   });
+//     // Guardar el marcador en la base de datos con valores extraídos
+//     await _databaseHelper.INSERT('markers', {
+//       'latitude': latitude.toString(),
+//       'longitude': longitude.toString(),
+//       'title': title,
+//     });
 
-//   // Mostrar los marcadores guardados en la base de datos
-//   await _showSavedMarkers();
-// }
+//     // Mostrar los marcadores guardados en la base de datos
+//     await _showSavedMarkers();
+//   }
 
 //   Future<void> _showSavedMarkers() async {
-//   List<Map<String, dynamic>> markers = await _databaseHelper.getMarkers();
+//     List<Map<String, dynamic>> markers = await _databaseHelper.getMarkers();
 
-//   // Formatear los datos de los marcadores para mostrarlos en un mensaje
-//   String markerInfo = 'Markers saved in the database:\n';
-//   markers.forEach((marker) {
-//     markerInfo +=
-//         'ID: ${marker['id']}, Title: ${marker['title']}, Latitude: ${marker['latitude']}, Longitude: ${marker['longitude']}\n';
-//   });
+//     // Formatear los datos de los marcadores para mostrarlos en un mensaje
+//     String markerInfo = 'Markers saved in the database:\n';
+//     markers.forEach((marker) {
+//       markerInfo +=
+//           'ID: ${marker['id']}, Title: ${marker['title']}, Latitude: ${marker['latitude']}, Longitude: ${marker['longitude']}\n';
+//     });
 
-//   // Mostrar un mensaje con la información de los marcadores
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return AlertDialog(
-//         title: Text('Saved Markers'),
-//         content: Text(markerInfo),
-//         actions: <Widget>[
-//           TextButton(
-//             onPressed: () {
-//               Navigator.of(context).pop();
-//             },
-//             child: Text('OK'),
-//           ),
-//         ],
-//       );
-//     },
-//   );
-// }
-
+//     // Mostrar un mensaje con la información de los marcadores
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: Text('Saved Markers'),
+//           content: Text(markerInfo),
+//           actions: <Widget>[
+//             TextButton(
+//               onPressed: () {
+//                 Navigator.of(context).pop();
+//               },
+//               child: Text('OK'),
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
 
 //   Future<void> _goToTheLake() async {
 //     final GoogleMapController controller = await _controller.future;
@@ -199,7 +199,7 @@
 //     );
 //   }
 // }
-
+///Arriba esta el anterior
 /*import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -329,8 +329,8 @@ class MapSampleState extends State<MapSample> {
 
 }*/
 
-
 /*import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -417,257 +417,17 @@ class MapSampleState extends State<MapSample> {
 }
 */
 
-
-
-//aqui va el codigo con foto:
-
-
-// import 'dart:async';
-// import 'dart:io';
-// import 'package:celaya_go/database/database_helper.dart';
-// import 'package:flutter/material.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:location/location.dart';
-// import 'package:image_picker/image_picker.dart';
-
-// class MapSample extends StatefulWidget {
-//   const MapSample({Key? key}) : super(key: key);
-
-//   @override
-//   State<MapSample> createState() => MapSampleState();
-// }
-
-// class MapSampleState extends State<MapSample> {
-//   final Completer<GoogleMapController> _controller =
-//       Completer<GoogleMapController>();
-//   late LocationData _currentLocation;
-//   bool _isLoading = true;
-//   Set<Marker> _markers = {};
-//   DatabaseHelper _databaseHelper = DatabaseHelper();
-//   File? _selectedImage;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _initLocation();
-//     _loadMarkers();
-//   }
-
-//   Future<void> _initLocation() async {
-//     try {
-//       var location = Location();
-//       location.onLocationChanged.listen((LocationData currentLocation) {
-//         if (mounted) {
-//           setState(() {
-//             _currentLocation = currentLocation;
-//             _isLoading = false;
-//           });
-//         }
-//       });
-//     } catch (e) {
-//       print("Error initializing location: $e");
-//     }
-//   }
-
-//   Future<void> _loadMarkers() async {
-//     List<Map<String, dynamic>> markers = await _databaseHelper.getMarkers();
-//     setState(() {
-//       _markers = markers.map((marker) {
-//         return Marker(
-//           markerId: MarkerId(marker['id'].toString()),
-//           position: LatLng(marker['latitude'], marker['longitude']),
-//           infoWindow: InfoWindow(title: marker['title']),
-//         );
-//       }).toSet();
-//     });
-//   }
-
-//   Future<void> _showMarkerDialog(LatLng position) async {
-//     TextEditingController titleController = TextEditingController();
-//     TextEditingController typeController = TextEditingController();
-//     TextEditingController descriptionController = TextEditingController();
-
-//     return showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//           title: Text('Enter Marker Information'),
-//           content: Column(
-//             children: [
-//               TextField(
-//                 controller: titleController,
-//                 decoration: InputDecoration(hintText: 'Title'),
-//               ),
-//               TextField(
-//                 controller: typeController,
-//                 decoration: InputDecoration(hintText: 'Type (Green or Red)'),
-//               ),
-//               TextField(
-//                 controller: descriptionController,
-//                 decoration: InputDecoration(hintText: 'Description'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () async {
-//                   final picker = ImagePicker();
-//                   final pickedImage =
-//                       await picker.pickImage(source: ImageSource.gallery);
-
-//                   if (pickedImage != null) {
-//                     setState(() {
-//                       _selectedImage = File(pickedImage.path);
-//                     });
-//                   }
-//                 },
-//                 child: Text('Select Image'),
-//               ),
-//             ],
-//           ),
-//           actions: <Widget>[
-//             TextButton(
-//               onPressed: () {
-//                 Navigator.of(context).pop();
-//               },
-//               child: Text('Cancel'),
-//             ),
-//             TextButton(
-//               onPressed: () {
-//                 String title = titleController.text.trim();
-//                 String type = typeController.text.trim();
-//                 String description = descriptionController.text.trim();
-
-//                 if (title.isNotEmpty) {
-//                   _addMarker(position, title, type, description, _selectedImage);
-//                 }
-
-//                 Navigator.of(context).pop();
-//               },
-//               child: Text('Save'),
-//             ),
-//           ],
-//         );
-//       },
-//     );
-//   }
-
-//   Future<void> _addMarker(LatLng position, String title, String type,
-//       String description, File? image) async {
-//     final MarkerId markerId = MarkerId(position.toString());
-
-//     // Extraer los valores de la posición
-//     double latitude = position.latitude;
-//     double longitude = position.longitude;
-
-//     final Marker marker = Marker(
-//       markerId: markerId,
-//       position: position,
-//       infoWindow: InfoWindow(title: title),
-//     );
-
-//     setState(() {
-//       _markers.add(marker);
-//     });
-
-//     // Guardar el marcador en la base de datos con valores extraídos
-//     await _databaseHelper.insertMarker({
-//       'id': markerId.value,
-//       'latitude': latitude,
-//       'longitude': longitude,
-//       'title': title,
-//       'type': type,
-//       'description': description,
-//       'image_path': image?.path, // Almacenar la ruta de la imagen
-//     });
-
-//     // Mostrar los marcadores guardados en la base de datos
-//     await _showSavedMarkers();
-//   }
-
-//   Future<void> _showSavedMarkers() async {
-//     List<Map<String, dynamic>> markers = await _databaseHelper.getMarkers();
-
-//     // Formatear los datos de los marcadores para mostrarlos en un mensaje
-//     String markerInfo = 'Markers saved in the database:\n';
-//     markers.forEach((marker) {
-//       markerInfo +=
-//           'ID: ${marker['id']}, Title: ${marker['title']}, Latitude: ${marker['latitude']}, Longitude: ${marker['longitude']}, Type: ${marker['type']}, Description: ${marker['description']}, Image: ${marker['image_path']}\n';
-//     });
-
-//     // Mostrar un mensaje con la información de los marcadores
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//           title: Text('Saved Markers'),
-//           content: Text(markerInfo),
-//           actions: <Widget>[
-//             TextButton(
-//               onPressed: () {
-//                 Navigator.of(context).pop();
-//               },
-//               child: Text('OK'),
-//             ),
-//           ],
-//         );
-//       },
-//     );
-//   }
-
-//   Future<void> _goToTheLake() async {
-//     final GoogleMapController controller = await _controller.future;
-//     await controller.animateCamera(
-//       CameraUpdate.newCameraPosition(
-//         CameraPosition(
-//           target: LatLng(
-//             _currentLocation.latitude!,
-//             _currentLocation.longitude!,
-//           ),
-//           zoom: 14.0,
-//         ),
-//       ),
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: _isLoading
-//           ? Center(
-//               child: CircularProgressIndicator(),
-//             )
-//           : GoogleMap(
-//               mapType: MapType.normal,
-//               initialCameraPosition: CameraPosition(
-//                 target: LatLng(
-//                   _currentLocation.latitude!,
-//                   _currentLocation.longitude!,
-//                 ),
-//                 zoom: 14.0,
-//               ),
-//               onMapCreated: (GoogleMapController controller) {
-//                 _controller.complete(controller);
-//               },
-//               myLocationEnabled: true,
-//               myLocationButtonEnabled: false,
-//               markers: _markers,
-//               onTap: (LatLng position) {
-//                 _showMarkerDialog(position);
-//               },
-//             ),
-//       floatingActionButton: FloatingActionButton.extended(
-//         onPressed: _goToTheLake,
-//         label: const Text('To the lake!'),
-//         icon: const Icon(Icons.directions_boat),
-//       ),
-//     );
-//   }
-// }
-
-
+//Empiezan los cambios
 import 'dart:async';
 import 'package:celaya_go/database/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:celaya_go/screens/turismo_screen.dart';
+
+void main() => runApp(MaterialApp(
+      home: MapSample(),
+    ));
 
 class MapSample extends StatefulWidget {
   const MapSample({Key? key}) : super(key: key);
@@ -677,6 +437,52 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
+  int _currentIndex = 0;
+
+  final List<Widget> _children = [
+    MapScreen(),
+     TurismoScreen(),
+    PlaceholderWidget(Colors.green),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _children[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.airplanemode_on_sharp),
+            label: 'Turismo',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.accessibility_new_sharp),
+            label: 'Perfil',
+          ),
+        ],
+      ),
+    );
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+}
+
+class MapScreen extends StatefulWidget {
+  @override
+  State<MapScreen> createState() => MapScreenState();
+}
+
+class MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
   late LocationData _currentLocation;
@@ -713,7 +519,8 @@ class MapSampleState extends State<MapSample> {
       _markers = markers.map((marker) {
         return Marker(
           markerId: MarkerId(marker['id'].toString()),
-          position: LatLng(marker['latitude'], marker['longitude']),
+          position: LatLng(double.parse(marker['latitude']),
+              double.parse(marker['longitude'])),
           infoWindow: InfoWindow(title: marker['title']),
         );
       }).toSet();
@@ -721,65 +528,57 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> _addMarker(LatLng position, String title) async {
-  final MarkerId markerId = MarkerId(position.toString());
+    final MarkerId markerId = MarkerId(position.toString());
 
-  // Extraer los valores de la posición
-  double latitude = position.latitude;
-  double longitude = position.longitude;
+    double latitude = position.latitude;
+    double longitude = position.longitude;
 
-  final Marker marker = Marker(
-    markerId: markerId,
-    position: position,
-    infoWindow: InfoWindow(title: title),
-  );
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: position,
+      infoWindow: InfoWindow(title: title),
+    );
 
-  setState(() {
-    _markers.add(marker);
-  });
+    setState(() {
+      _markers.add(marker);
+    });
 
-  // Guardar el marcador en la base de datos con valores extraídos
-  await _databaseHelper.INSERT('markers', {
-    'latitude': latitude.toString(),
-    'longitude': longitude.toString(),
-    'title': title,
-  });
+    await _databaseHelper.INSERT('markers', {
+      'latitude': latitude.toString(),
+      'longitude': longitude.toString(),
+      'title': title,
+    });
 
-  // Mostrar los marcadores guardados en la base de datos
-  await _showSavedMarkers();
-}
-
-
+    await _showSavedMarkers();
+  }
 
   Future<void> _showSavedMarkers() async {
-  List<Map<String, dynamic>> markers = await _databaseHelper.getMarkers();
+    List<Map<String, dynamic>> markers = await _databaseHelper.getMarkers();
 
-  // Formatear los datos de los marcadores para mostrarlos en un mensaje
-  String markerInfo = 'Markers saved in the database:\n';
-  markers.forEach((marker) {
-    markerInfo +=
-        'ID: ${marker['id']}, Title: ${marker['title']}, Latitude: ${marker['latitude']}, Longitude: ${marker['longitude']}\n';
-  });
+    String markerInfo = 'Markers saved in the database:\n';
+    markers.forEach((marker) {
+      markerInfo +=
+          'ID: ${marker['id']}, Title: ${marker['title']}, Latitude: ${marker['latitude']}, Longitude: ${marker['longitude']}\n';
+    });
 
-  // Mostrar un mensaje con la información de los marcadores
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Saved Markers'),
-        content: Text(markerInfo),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('OK'),
-          ),
-        ],
-      );
-    },
-  );
-}
-
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Saved Markers'),
+          content: Text(markerInfo),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
@@ -799,6 +598,9 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Map Screen'),
+      ),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),
@@ -862,6 +664,25 @@ class MapSampleState extends State<MapSample> {
           ],
         );
       },
+    );
+  }
+}
+
+class PlaceholderWidget extends StatelessWidget {
+  final Color color;
+
+  PlaceholderWidget(this.color);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: color,
+      child: Center(
+        child: Text(
+          'Placeholder',
+          style: TextStyle(fontSize: 22.0),
+        ),
+      ),
     );
   }
 }
