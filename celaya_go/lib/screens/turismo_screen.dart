@@ -18,53 +18,48 @@ class TurismoScreen extends StatelessWidget {
                   'image': 'assets/image1.jpeg',
                   'description': 'La bola del agua'
                 },
-                {
-                  'image': 'assets/image2.jpeg',
-                  'description': 'Jardin'
-                },
-                {
-                  'image': 'assets/image3.jpeg',
-                  'description': 'Museo'
-                },
-                {
-                  'image': 'assets/image4.jpeg',
-                  'description': 'Estadio'
-                },
+                {'image': 'assets/image2.jpeg', 'description': 'Jardin'},
+                {'image': 'assets/image3.jpeg', 'description': 'Museo'},
+                {'image': 'assets/image4.jpeg', 'description': 'Estadio'},
               ]),
             ]),
             _buildSection('Hoteles', [
               _buildCarouselSlider([
                 {
-                  'image': 'assets/hotel_1.jpg',
-                  'description': 'Descripción del hotel 1'
+                  'image': 'assets/image9.jpeg',
+                  'description': 'Hotel Mary 4 Estrellas'
                 },
                 {
-                  'image': 'assets/hotel_2.jpg',
-                  'description': 'Descripción del hotel 2'
+                  'image': 'assets/image10.jpg',
+                  'description': 'Casa Inn Celaya Veleros 4 Estrellas'
                 },
                 {
-                  'image': 'assets/hotel_3.jpg',
-                  'description': 'Descripción del hotel 3'
+                  'image': 'assets/image11.jpg',
+                  'description': 'Candlewood Suites Celaya 4 Estrellas '
+                },
+                {
+                  'image': 'assets/image12.jpg',
+                  'description': 'St George Hotel 5 Estrellas'
                 },
               ]),
             ]),
             _buildSection('Restaurantes', [
               _buildCarouselSlider([
                 {
-                  'image': 'assets/image5.jpeg',
-                  'description': 'Chino/Sticker-Man House'
+                  'image': 'assets/image13.jpg',
+                  'description': 'Restaurant Ikal'
                 },
                 {
-                  'image': 'assets/image6.jpeg',
-                  'description': 'Quien sabde donde'
+                  'image': 'assets/image14.jpeg',
+                  'description': 'Barra Galera'
                 },
                 {
-                  'image': 'assets/image7.jpeg',
-                  'description': 'Quien sabde donde'
+                  'image': 'assets/image15.jpg',
+                  'description': 'Fogon do Brasil'
                 },
                 {
-                  'image': 'assets/image8.jpeg',
-                  'description': 'Quien sabde donde'
+                  'image': 'assets/image16.jpg',
+                  'description': 'Mezzé'
                 },
               ]),
             ]),
@@ -76,15 +71,15 @@ class TurismoScreen extends StatelessWidget {
                 },
                 {
                   'image': 'assets/image6.jpeg',
-                  'description': 'Quien sabde donde'
+                  'description': 'Emiliano Zapata'
                 },
                 {
                   'image': 'assets/image7.jpeg',
-                  'description': 'Quien sabde donde'
+                  'description': 'Hacienda del bosque'
                 },
                 {
                   'image': 'assets/image8.jpeg',
-                  'description': 'Quien sabde donde'
+                  'description': 'Las insurgentes'
                 },
               ]),
             ]),
