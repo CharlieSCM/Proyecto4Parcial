@@ -370,10 +370,11 @@ Widget build(BuildContext context) {
                   myLocationButtonEnabled: false,
                   markers: _markers,
                   onTap: (LatLng position) {
-                    _isMarkerSelected = false;
-                    setState(() {
-                      _selectedMarker = null;
-                    });
+                    //_isMarkerSelected = false;
+                    //setState(() {
+                    //  _selectedMarker = null;
+                    //});
+                    _showMarkerDialog(position);
                   },
                 ),
               ),
