@@ -19,12 +19,16 @@ class TurismoScreen extends StatelessWidget {
                   'description': 'La bola del agua'
                 },
                 {
-                  'image': 'assets/lugar_turistico_2.jpg',
-                  'description': 'Descripción del lugar 2'
+                  'image': 'assets/image2.jpeg',
+                  'description': 'Jardin'
                 },
                 {
-                  'image': 'assets/lugar_turistico_3.jpg',
-                  'description': 'Descripción del lugar 3'
+                  'image': 'assets/image3.jpeg',
+                  'description': 'Museo'
+                },
+                {
+                  'image': 'assets/image4.jpeg',
+                  'description': 'Estadio'
                 },
               ]),
             ]),
@@ -47,32 +51,40 @@ class TurismoScreen extends StatelessWidget {
             _buildSection('Restaurantes', [
               _buildCarouselSlider([
                 {
-                  'image': 'assets/restaurante_1.jpg',
-                  'description': 'Descripción del restaurante 1'
+                  'image': 'assets/image5.jpeg',
+                  'description': 'Chino/Sticker-Man House'
                 },
                 {
-                  'image': 'assets/restaurante_2.jpg',
-                  'description': 'Descripción del restaurante 2'
+                  'image': 'assets/image6.jpeg',
+                  'description': 'Quien sabde donde'
                 },
                 {
-                  'image': 'assets/restaurante_3.jpg',
-                  'description': 'Descripción del restaurante 3'
+                  'image': 'assets/image7.jpeg',
+                  'description': 'Quien sabde donde'
+                },
+                {
+                  'image': 'assets/image8.jpeg',
+                  'description': 'Quien sabde donde'
                 },
               ]),
             ]),
             _buildSection('Lugares no Seguros', [
               _buildCarouselSlider([
                 {
-                  'image': 'assets/lugar_no_seguro_1.jpg',
-                  'description': 'Descripción del lugar no seguro 1'
+                  'image': 'assets/image5.jpeg',
+                  'description': 'Chino/Sticker-Man House'
                 },
                 {
-                  'image': 'assets/lugar_no_seguro_2.jpg',
-                  'description': 'Descripción del lugar no seguro 2'
+                  'image': 'assets/image6.jpeg',
+                  'description': 'Quien sabde donde'
                 },
                 {
-                  'image': 'assets/lugar_no_seguro_3.jpg',
-                  'description': 'Descripción del lugar no seguro 3'
+                  'image': 'assets/image7.jpeg',
+                  'description': 'Quien sabde donde'
+                },
+                {
+                  'image': 'assets/image8.jpeg',
+                  'description': 'Quien sabde donde'
                 },
               ]),
             ]),
