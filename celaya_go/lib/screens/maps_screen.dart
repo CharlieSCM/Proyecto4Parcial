@@ -3,12 +3,12 @@ import 'package:celaya_go/database/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:celaya_go/screens/turismo_screen.dart';
+//import 'package:celaya_go/screens/turismo_screen.dart';
 import 'package:celaya_go/models/markers_model.dart';
 
-void main() => runApp(MaterialApp(
-      home: MapSample(),
-    ));
+/*void main() => runApp(MaterialApp(
+  home: MapSample(),
+));*/
 
 class MapSample extends StatefulWidget {
   const MapSample({Key? key}) : super(key: key);
@@ -17,55 +17,15 @@ class MapSample extends StatefulWidget {
   State<MapSample> createState() => MapSampleState();
 }
 
-class MapSampleState extends State<MapSample> {
-  int _currentIndex = 0;
-
-  final List<Widget> _children = [
-    MapScreen(),
-    TurismoScreen(),
-    PlaceholderWidget(Colors.green),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.airplanemode_on_sharp),
-            label: 'Turismo',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.accessibility_new_sharp),
-            label: 'Perfil',
-          ),
-        ],
-      ),
-    );
-  }
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-}
-
-class MapScreen extends StatefulWidget {
+/*class MapScreen extends StatefulWidget {
   @override
   State<MapScreen> createState() => MapScreenState();
-}
+}*/
 
-class MapScreenState extends State<MapScreen> {
+//class MapScreenState extends State<MapScreen> {
+  class MapSampleState extends State<MapSample> {
   final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
+  Completer<GoogleMapController>();
   late LocationData _currentLocation;
   bool _isLoading = true;
   Set<Marker> _markers = {};
@@ -96,20 +56,6 @@ class MapScreenState extends State<MapScreen> {
     }
   }
 
-  //Carga las ubicaciones guardadas en la base de datos
-//   Future<void> _loadMarkers() async {
-//   List<MarkerModel> markers = await _databaseHelper.getMarkers();
-//   setState(() {
-//     _markers = markers.map((marker) {
-//       return Marker(
-//         markerId: MarkerId(marker.id.toString()),
-//         position: LatLng(double.parse(marker.latitude!),
-//             double.parse(marker.longitude!)),
-//         infoWindow: InfoWindow(title: marker.title),
-//       );
-//     }).toSet();
-//   });
-// }
   Future<void> _loadMarkers() async {
     List<MarkerModel> markers = await _databaseHelper.getMarkers();
     setState(() {
@@ -130,7 +76,6 @@ class MapScreenState extends State<MapScreen> {
     });
   }
 
-  //Metodo con el que se agrega una ubicacion
   Future<void> _addMarker(LatLng position, String title) async {
     Marker newMarker = Marker(
       markerId: MarkerId(position.toString()),
@@ -142,7 +87,6 @@ class MapScreenState extends State<MapScreen> {
       _markers.add(newMarker);
     });
 
-    // Inserta el nuevo marcador en la base de datos
     await _databaseHelper.INSERT(
         'markers',
         MarkerModel(
@@ -151,18 +95,16 @@ class MapScreenState extends State<MapScreen> {
           title: title,
         ));
 
-    // Carga y muestra los marcadores actualizados desde la base de datos
     List<MarkerModel> markerModels = await _databaseHelper.getMarkers();
 
     _showSavedMarkers(markerModels);
   }
 
-  //muestra los datos de la tabla (es solo para revicion no se debe moestrar al usuario)
   Future<void> _showSavedMarkers(List<MarkerModel> markers) async {
     String markerInfo = '';
     markers.forEach((marker) {
       markerInfo +=
-          'ID: ${marker.id}, Title: ${marker.title}, Latitude: ${marker.latitude}, Longitude: ${marker.longitude}\n';
+      'ID: ${marker.id}, Title: ${marker.title}, Latitude: ${marker.latitude}, Longitude: ${marker.longitude}\n';
     });
 
     showDialog(
@@ -200,12 +142,8 @@ class MapScreenState extends State<MapScreen> {
             ),
             TextButton(
               onPressed: () async {
-                // Elimina el marcador de la base de datos
                 await _databaseHelper.deleteMarker(marker.id!);
-
-                // Actualiza la lista de marcadores y vuelve a cargarlos
                 _loadMarkers();
-
                 Navigator.of(context).pop();
               },
               child: Text('Eliminar'),
@@ -227,7 +165,7 @@ class MapScreenState extends State<MapScreen> {
               leading: Icon(Icons.edit),
               title: Text('Editar'),
               onTap: () {
-                Navigator.pop(context); // Cierra el BottomSheet
+                Navigator.pop(context);
                 _editMarker(marker);
               },
             ),
@@ -235,7 +173,7 @@ class MapScreenState extends State<MapScreen> {
               leading: Icon(Icons.info),
               title: Text('Detalles'),
               onTap: () {
-                Navigator.pop(context); // Cierra el BottomSheet
+                Navigator.pop(context);
                 _showMarkerDetails(marker);
               },
             ),
@@ -243,7 +181,7 @@ class MapScreenState extends State<MapScreen> {
               leading: Icon(Icons.delete),
               title: Text('Eliminar'),
               onTap: () {
-                Navigator.pop(context); // Cierra el BottomSheet
+                Navigator.pop(context);
                 _deleteMarker(marker);
               },
             ),
@@ -253,7 +191,6 @@ class MapScreenState extends State<MapScreen> {
     );
   }
 
-// Función para editar un marcador
   void _editMarker(MarkerModel marker) async {
     TextEditingController titleController = TextEditingController();
     titleController.text = marker.title ?? '';
@@ -278,13 +215,9 @@ class MapScreenState extends State<MapScreen> {
               onPressed: () async {
                 String newTitle = titleController.text.trim();
                 if (newTitle.isNotEmpty) {
-                  // Actualiza el marcador en la base de datos
                   marker.title = newTitle;
                   await _databaseHelper.updateMarker(marker.toMap());
-
-                  // Actualiza la lista de marcadores y vuelve a cargarlos
                   _loadMarkers();
-
                   Navigator.of(context).pop();
                 }
               },
@@ -296,7 +229,6 @@ class MapScreenState extends State<MapScreen> {
     );
   }
 
-  // Función para mostrar detalles de un marcador
   void _showMarkerDetails(MarkerModel marker) {
     showDialog(
       context: context,
@@ -326,8 +258,7 @@ class MapScreenState extends State<MapScreen> {
     );
   }
 
-  //boton que te mandara a una ubicacion (aun falta modificar)
-  Future<void> _goToTheLake() async {
+  Future<void> _miUbicacion() async {
     final GoogleMapController controller = await _controller.future;
     await controller.animateCamera(
       CameraUpdate.newCameraPosition(
@@ -350,82 +281,51 @@ class MapScreenState extends State<MapScreen> {
       ),
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(),
-            )
+        child: CircularProgressIndicator(),
+      )
           : Column(
-              children: [
-                Expanded(
-                  child: GoogleMap(
-                    mapType: MapType.none,
-                    initialCameraPosition: CameraPosition(
-                      target: LatLng(
-                        _currentLocation.latitude!,
-                        _currentLocation.longitude!,
-                      ),
-                      zoom: 14.0,
-                    ),
-                    onMapCreated: (GoogleMapController controller) {
-                      _controller.complete(controller);
-                    },
-                    myLocationEnabled: true,
-                    myLocationButtonEnabled: false,
-                    markers: _markers,
-                    onTap: (LatLng position) {
-                      //_isMarkerSelected = false;
-                      //setState(() {
-                      //  _selectedMarker = null;
-                      //});
-                      _showMarkerDialog(position);
-                    },
-                  ),
+        children: [
+          Expanded(
+            child: GoogleMap(
+              mapType: MapType.none,
+              initialCameraPosition: CameraPosition(
+                target: LatLng(
+                  _currentLocation.latitude!,
+                  _currentLocation.longitude!,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_isMarkerSelected) {
-                      _showMarkerOptions(_selectedMarker!);
-                    }
-                  },
-                  child: Text('Mostrar opciones'),
-                ),
-                // if (_isMarkerSelected)
-                //   ElevatedButton(
-                //     onPressed: () {
-                //       // Acción de editar
-                //       // Puedes implementar la acción de editar aquí
-                //       _editMarker(_selectedMarker!);
-                //     },
-                //     child: Text('Editar'),
-                //   ),
-                // if (_isMarkerSelected)
-                //   ElevatedButton(
-                //     onPressed: () {
-                //       // Acción de detalles
-                //       // Puedes implementar la acción de detalles aquí
-                //       _showMarkerDetails(_selectedMarker!);
-                //     },
-                //     child: Text('Detalles'),
-                //   ),
-                // if (_isMarkerSelected)
-                //   ElevatedButton(
-                //     onPressed: () {
-                //       // Acción de eliminar
-                //       // Puedes implementar la acción de eliminar aquí
-                //       _deleteMarker(_selectedMarker!);
-                //     },
-                //     child: Text('Eliminar'),
-                //   ),
-              ],
+                zoom: 14.0,
+              ),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
+              markers: _markers,
+              onTap: (LatLng position) {
+                _showMarkerDialog(position);
+              },
             ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (_isMarkerSelected) {
+                _showMarkerOptions(_selectedMarker!);
+              }
+            },
+            child: Text('Mostrar opciones'),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
+        onPressed: _miUbicacion,
+        label: const Text('Yo'),
+        icon: const Icon(Icons.location_pin),
       ),
     );
   }
 
-  //Cuando se toque la pantalla mostrara el siguiente recuadro para agregar el nombre del marcador(ubicacion)
   Future<void> _showMarkerDialog(LatLng position) async {
+    _isMarkerSelected = false;
     TextEditingController titleController = TextEditingController();
 
     return showDialog(
@@ -452,30 +352,11 @@ class MapScreenState extends State<MapScreen> {
                 }
                 Navigator.of(context).pop();
               },
-              child: Text('Save'),
+              child: Text('Guardar'),
             ),
           ],
         );
       },
-    );
-  }
-}
-
-class PlaceholderWidget extends StatelessWidget {
-  final Color color;
-
-  PlaceholderWidget(this.color);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: color,
-      child: Center(
-        child: Text(
-          'Placeholder',
-          style: TextStyle(fontSize: 22.0),
-        ),
-      ),
     );
   }
 }
