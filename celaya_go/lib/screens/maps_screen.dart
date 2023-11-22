@@ -406,9 +406,8 @@ import 'package:celaya_go/database/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-//import 'package:celaya_go/screens/turismo_screen.dart';
+import 'package:celaya_go/screens/turismo_screen.dart';
 import 'package:celaya_go/models/markers_model.dart';
-import 'OnboardingScreen.dart';
 import 'package:celaya_go/routes.dart';
 
 /*void main() => runApp(MaterialApp(
@@ -503,6 +502,7 @@ class MapSampleState extends State<MapSample> {
     List<MarkerModel> markerModels = await _databaseHelper.getMarkers();
 
     _showSavedMarkers(markerModels);
+    _loadMarkers();
   }
 
   Future<void> _showSavedMarkers(List<MarkerModel> markers) async {
