@@ -1,5 +1,5 @@
-/*import 'package:flutter/material.dart';
-//import 'package:celaya_go/screens/register_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:celaya_go/screens/register_screen.dart';
 import 'package:celaya_go/firebase/email_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -10,11 +10,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
-    final conNameUser = TextEditingController();
-    final conEmailUser = TextEditingController();
-    final conPwdUser = TextEditingController();
-    final emailAuth = EmailAuth();
+  final conNameUser = TextEditingController();
+  final conEmailUser = TextEditingController();
+  final conPwdUser = TextEditingController();
+  final emailAuth = EmailAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +29,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         TextFormField(
           controller: conPwdUser,
         ),
-        ElevatedButton(onPressed: (){
-          var email = conEmailUser.text;
-          var pwd = conPwdUser.text;
-          emailAuth.createUser(emailUser: email, pwdUser: pwd);
-        }, 
-        child: Text('Registrar Usuario'))
-      ]
-      ),
+        ElevatedButton(
+            onPressed: () {
+              var email = conEmailUser.text;
+              var pwd = conPwdUser.text;
+              emailAuth.createUser(emailUser: email, pwdUser: pwd);
+            },
+            child: Text('Registrar Usuario'))
+      ]),
     );
   }
-}*/
+}

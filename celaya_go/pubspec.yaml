@@ -20,6 +20,7 @@ dependencies:
   sqflite_common: '^2.5.0+1'
   lottie: ^2.6.0
   day_night_switcher: ^0.2.0+1
+  google_sign_in: ^6.1.6
   path: ^1.8.3
   persistent_bottom_nav_bar: ^5.0.2
   flutter:

@@ -1,4 +1,5 @@
 import 'package:celaya_go/screens/dashboard_screen.dart';
+import 'package:celaya_go/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -36,7 +37,7 @@ class OnboardingPage extends StatelessWidget {
           // Navegar a la pantalla principal después del onboarding
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => DashboardScreen()),
+            MaterialPageRoute(builder: (context) => LoginScreen()),
           );
         },
       ),

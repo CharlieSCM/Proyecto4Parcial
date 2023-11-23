@@ -1,3 +1,5 @@
+import 'package:celaya_go/firebase/auth_with_google.dart';
+import 'package:celaya_go/models/firebase_user.dart';
 import 'package:flutter/material.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +20,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
     //Navigator.pushReplacementNamed(context, '/map');
   }
 
+  final FirebaseUser _user = FirebaseUser();
+  final AuthServiceGoogle _auth = AuthServiceGoogle();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _user.user = _auth.user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +45,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Drawer(
       child: ListView(
         children: [
-          const UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage('https://i.pravatar.cc/400'),
-            ),
-            accountName: Text('Joseph'),
-            accountEmail: Text('Maldonadojose@gmail.com'),
-          ),
+          UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: _user.imageUrl != null
+                    ? NetworkImage(_user.imageUrl!)
+                    : NetworkImage('https://i.pravatar.cc/300'),
+              ),
+              accountName: _user.name != null
+                  ? Text(_user.name!)
+                  : Text('Buenas tardes'),
+              accountEmail: _user.email != null
+                  ? Text(_user.email!)
+                  : Text('Bienvenido')),
           ListTile(
             leading: Icon(Icons.map),
             title: Text('Map'),
@@ -58,17 +75,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
           DayNightSwitcher(
             isDarkModeEnabled: globalValues.flagTheme.value,
             onStateChanged: (isDarkModeEnabled) {
-            globalValues.flagTheme.value = isDarkModeEnabled;
-            globalValues().saveValue(isDarkModeEnabled);
+              globalValues.flagTheme.value = isDarkModeEnabled;
+              globalValues().saveValue(isDarkModeEnabled);
             },
           ),
           ListTile(
-            leading: Icon(Icons.logout),
-            title: Text('Cerrar secion'),
-            //onTap: () => Navigator.pushNamed(context, '/12345'),
-          ),
+            leading: Icon(Icons.logout), // Ícono de cerrar sesión
+            title: Text('Cerrar sesión'),
+            onTap: () {
+              logout(); // Llama a la función logout al hacer clic en "Cerrar sesión"
+              _handleLogOut();
+              // _logoutFB();
+            },
+          
+        )
         ],
       ),
     );
+  
   }
+
+void _handleLogOut() async {
+  await _auth.signOutGoogle();
+  Navigator.pushReplacementNamed(context, '/logout');
+  setState(() {
+    _user.user = _auth.user;
+    Navigator.pushNamed(context, '/logout');
+  });
 }
+
+void _handleLogin() async {
+  await _auth.signInGoogle();
+  setState(() {
+    _user.user = _auth.user;
+  });
+}
+}
+
