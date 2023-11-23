@@ -246,11 +246,6 @@
 //     );
 //   }*/
 // }
-
-
-
-
-
 import 'package:celaya_go/firebase/auth_with_google.dart';
 import 'package:celaya_go/firebase/email_auth.dart';
 import 'package:celaya_go/models/firebase_user.dart';
