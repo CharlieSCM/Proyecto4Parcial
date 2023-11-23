@@ -1,7 +1,7 @@
-//import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
-import 'package:celaya_go/routes.dart';
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:celaya_go/assets/global_values.dart';
 //import 'maps_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -41,7 +41,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             accountEmail: Text('Maldonadojose@gmail.com'),
           ),
           ListTile(
-            leading: Icon(Icons.logout),
+            leading: Icon(Icons.map),
             title: Text('Map'),
             onTap: () => Navigator.pushNamed(context, '/map'),
           ),
@@ -54,6 +54,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
             leading: Icon(Icons.question_mark),
             title: Text('Por si algo mas se me ocurre'),
             onTap: () => Navigator.pushNamed(context, '/turismo'),
+          ),
+          DayNightSwitcher(
+            isDarkModeEnabled: globalValues.flagTheme.value,
+            onStateChanged: (isDarkModeEnabled) {
+            globalValues.flagTheme.value = isDarkModeEnabled;
+            globalValues().saveValue(isDarkModeEnabled);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text('Cerrar secion'),
+            //onTap: () => Navigator.pushNamed(context, '/12345'),
           ),
         ],
       ),
