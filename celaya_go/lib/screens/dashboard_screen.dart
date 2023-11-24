@@ -176,7 +176,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           Container(
             color: Colors.black, // Color de fondo negro
-            padding: EdgeInsets.all(16.0), // Ajusta el espaciado interno según tus preferencias
+            padding: EdgeInsets.all(
+                16.0), // Ajusta el espaciado interno según tus preferencias
             child: Text(
               'Celaya es una ciudad ubicada en el estado de Guanajuato, México. '
               'Con una rica historia y cultura, Celaya ofrece a sus visitantes '
@@ -210,7 +211,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
       margin: EdgeInsets.symmetric(horizontal: 4.0),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: _currentPage == index ? const Color.fromARGB(255, 228, 14, 14) : Colors.grey,
+        color: _currentPage == index
+            ? const Color.fromARGB(255, 228, 14, 14)
+            : Colors.grey,
       ),
     );
   }
@@ -241,9 +244,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onTap: () => Navigator.pushNamed(context, '/turismo'),
           ),
           ListTile(
-            leading: Icon(Icons.question_mark),
-            title: Text('Por si algo más se me ocurre'),
-            onTap: () => Navigator.pushNamed(context, '/turismo'),
+            leading: Icon(Icons.ads_click_sharp),
+            title: Text('Acerca de celaya'),
+            onTap: () => Navigator.pushNamed(context, '/tradicion'),
           ),
           DayNightSwitcher(
             isDarkModeEnabled: globalValues.flagTheme.value,
