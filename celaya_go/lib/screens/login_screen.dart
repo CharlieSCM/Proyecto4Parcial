@@ -198,31 +198,31 @@
 //         });
 //   }
 
-//   // ElevatedButton _loginFB() {
-//   //   return ElevatedButton.icon(icon: Icon(Icons.login), label: Text('Sign with Facebook'), onPressed: () async{
-//   //     final LoginResult result = await FacebookAuth.instance.login();
-//   //     if (result.status == LoginStatus.success){
-//   //       _accessToken = result.accessToken;
-//   //       final userData = await FacebookAuth.instance.getUserData();
-//   //       _userData=_userData;
-//   //     }else{
-//   //       print(result.status);
-//   //       print(result.message);
-//   //     }
-//   //     setState(() {
-//   //       _checking=false;
-//   //       Navigator.pushNamed(context, '/dash');
-//   //     });
-//   //   });
-//   // }
+// ElevatedButton _loginFB() {
+  //   return ElevatedButton.icon(icon: Icon(Icons.login), label: Text('Sign with Facebook'), onPressed: () async{
+  //     final LoginResult result = await FacebookAuth.instance.login();
+  //     if (result.status == LoginStatus.success){
+  //       _accessToken = result.accessToken;
+  //       final userData = await FacebookAuth.instance.getUserData();
+  //       _userData=_userData;
+  //     }else{
+  //       print(result.status);
+  //       print(result.message);
+  //     }
+  //     setState(() {
+  //       _checking=false;
+  //       Navigator.pushNamed(context, '/dash');
+  //     });
+  //   });
+  // }
 
-//   // _logoutFB() async{
-//   //   await FacebookAuth.instance.logOut();
-//   //   _accessToken = null;
-//   //   _userData = null;
-//   //   setState(() {
-//   //   });
-//   // }
+  // _logoutFB() async{
+  //   await FacebookAuth.instance.logOut();
+  //   _accessToken = null;
+  //   _userData = null;
+  //   setState(() {
+  //   });
+  // }
 
 //   /*Column _logged() {
 //     return Column(

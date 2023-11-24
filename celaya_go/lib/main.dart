@@ -76,11 +76,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import '../assets/global_values.dart';
 import '../assets/styles_app.dart';
+import 'package:celaya_go/firebase/notificaciones.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseAuth.instance.authStateChanges();
+  await PushNotificationProvider().initializeApp();
 
   runApp(MainApp());
 }
