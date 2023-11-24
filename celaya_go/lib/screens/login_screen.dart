@@ -246,6 +246,9 @@
 //     );
 //   }*/
 // }
+
+//si pero cambiar algo
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:celaya_go/firebase/auth_with_google.dart';
 import 'package:celaya_go/firebase/email_auth.dart';
@@ -315,8 +318,8 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 20),
               CircleAvatar(
                 radius: 80.0,
-                backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage('images/gamer_avatar.png'),
+                backgroundColor: Color.fromARGB(0, 226, 219, 219),
+                backgroundImage: AssetImage('assets/celaya_image2.jpg'),
               ),
               SizedBox(height: 20),
               Text(
@@ -336,9 +339,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: InputDecoration(
                   hintText: 'Correo',
                   labelText: 'Correo',
-                  fillColor: Colors.white,
+                  fillColor: Color.fromARGB(255, 23, 22, 22),
                   filled: true,
-                  suffixIcon: Icon(Icons.verified_user, color: Colors.white),
+                  suffixIcon: Icon(Icons.admin_panel_settings_outlined,
+                      color: Colors.white),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                     borderSide: BorderSide.none,
@@ -349,17 +353,18 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 20),
               TextField(
                 enableInteractiveSelection: false,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Color.fromARGB(255, 247, 247, 247)),
                 decoration: InputDecoration(
                   hintText: 'Contraseña',
                   labelText: 'Contraseña',
-                  suffixIcon: Icon(Icons.password, color: Colors.white),
+                  suffixIcon: Icon(Icons.password,
+                      color: Color.fromARGB(255, 255, 254, 254)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                     borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: const Color.fromARGB(255, 23, 22, 22),
                 ),
                 controller: txtConPass,
                 obscureText: true,

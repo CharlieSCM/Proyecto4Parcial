@@ -772,6 +772,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+
 class TurismoScreen extends StatelessWidget {
   final List<Map<String, String>> lugares = [
     {

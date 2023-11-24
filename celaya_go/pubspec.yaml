@@ -78,6 +78,7 @@ dependencies:
   provider: ^6.1.1
   concentric_transition: ^1.0.3
   auto_size_text: ^3.0.0
+cloud_firestore: ^4.13.2
 
 dev_dependencies:
   flutter_test:
