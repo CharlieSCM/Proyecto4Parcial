@@ -172,11 +172,11 @@
 //               /*ElevatedButton(onPressed: () {
 //             //_login();
 //             //_loginFB();
-//            }, child: _login(), _loginFB //_user.uid != null ? _logged() : _login() 
+//            }, child: _login(), _loginFB //_user.uid != null ? _logged() : _login()
 //            ),
 //            Divider(height: 5,),
 //            ElevatedButton(onPressed: (){
-              
+
 //            }, child: btnEntrar)*/
 //             ],
 //           )
@@ -199,30 +199,30 @@
 //   }
 
 // ElevatedButton _loginFB() {
-  //   return ElevatedButton.icon(icon: Icon(Icons.login), label: Text('Sign with Facebook'), onPressed: () async{
-  //     final LoginResult result = await FacebookAuth.instance.login();
-  //     if (result.status == LoginStatus.success){
-  //       _accessToken = result.accessToken;
-  //       final userData = await FacebookAuth.instance.getUserData();
-  //       _userData=_userData;
-  //     }else{
-  //       print(result.status);
-  //       print(result.message);
-  //     }
-  //     setState(() {
-  //       _checking=false;
-  //       Navigator.pushNamed(context, '/dash');
-  //     });
-  //   });
-  // }
+//   return ElevatedButton.icon(icon: Icon(Icons.login), label: Text('Sign with Facebook'), onPressed: () async{
+//     final LoginResult result = await FacebookAuth.instance.login();
+//     if (result.status == LoginStatus.success){
+//       _accessToken = result.accessToken;
+//       final userData = await FacebookAuth.instance.getUserData();
+//       _userData=_userData;
+//     }else{
+//       print(result.status);
+//       print(result.message);
+//     }
+//     setState(() {
+//       _checking=false;
+//       Navigator.pushNamed(context, '/dash');
+//     });
+//   });
+// }
 
-  // _logoutFB() async{
-  //   await FacebookAuth.instance.logOut();
-  //   _accessToken = null;
-  //   _userData = null;
-  //   setState(() {
-  //   });
-  // }
+// _logoutFB() async{
+//   await FacebookAuth.instance.logOut();
+//   _accessToken = null;
+//   _userData = null;
+//   setState(() {
+//   });
+// }
 
 //   /*Column _logged() {
 //     return Column(
@@ -306,6 +306,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 40,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontFamily:
+                      'Anton', // Nombre de la fuente sin la extensión del archivo
                 ),
               ),
               SizedBox(height: 20),
@@ -320,6 +322,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily:
+                      'DM Serif Display', // Nombre de la fuente sin la extensión del archivo
                 ),
               ),
               SizedBox(height: 20),
@@ -377,7 +382,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 232, 76, 61), // Rojo más intenso
+                      primary:
+                          Color.fromARGB(255, 232, 76, 61), // Rojo más intenso
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
