@@ -57,16 +57,10 @@ class DatabaseHelper {
           .delete(tblName, where: '$field = ?', whereArgs: [objectId]);
     }
   }
-
   Future<void> deleteMarker(int id) async {
     final db = await database;
     await db!.delete('markers', where: 'id = ?', whereArgs: [id]);
   }
-  
-  /*Future<List<Map<String, dynamic>>> getMarkers() async {
-    final db = await database;
-    return db!.query('markers');
-  }*/
   Future<List<MarkerModel>> getMarkers() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db!.query('markers');
@@ -74,7 +68,6 @@ class DatabaseHelper {
       return MarkerModel.fromMap(maps[i]);
     });
   }
-
   Future<void> updateMarker(Map<String, dynamic> updatedMarker) async {
     final db = await database;
     await db!.update('markers', updatedMarker,

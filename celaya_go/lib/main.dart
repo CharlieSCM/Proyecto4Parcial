@@ -70,6 +70,7 @@
 
 
 import 'package:celaya_go/routes.dart';
+import 'package:celaya_go/screens/OnboardingScreen.dart';
 import 'package:celaya_go/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -109,7 +110,7 @@ class _MainAppState extends State<MainApp> {
       builder: (context, value, _){
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: LoginScreen(), //DashboardScreen(), //LoginScreen(),
+          home: OnboardingPage(), //LoginScreen(),
           routes: getRouters(),
           theme: value ? StylesApp.darkTheme(context) : StylesApp.lightTheme(context)
         );

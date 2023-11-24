@@ -249,6 +249,7 @@
 import 'package:celaya_go/firebase/auth_with_google.dart';
 import 'package:celaya_go/firebase/email_auth.dart';
 import 'package:celaya_go/models/firebase_user.dart';
+import 'package:celaya_go/screens/recuperacionPass.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -318,7 +319,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 20),
               Text(
-                'Gamer Tag',
+                'Iniciar sesion',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,
@@ -361,6 +362,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 controller: txtConPass,
                 obscureText: true,
+              ),
+              SizedBox(height: 10,),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return ForgotPasswordPage();
+                        },
+                        ),
+                        );
+                      },
+                      child: Text('¿Olvidaste tu contraseña?',
+                      style: TextStyle(fontSize: 15),),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 20),
               TextButton(
