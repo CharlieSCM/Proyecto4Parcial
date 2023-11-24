@@ -246,6 +246,7 @@
 //     );
 //   }*/
 // }
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:celaya_go/firebase/auth_with_google.dart';
 import 'package:celaya_go/firebase/email_auth.dart';
 import 'package:celaya_go/models/firebase_user.dart';
@@ -363,7 +364,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: txtConPass,
                 obscureText: true,
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.0),
                 child: Row(
@@ -371,14 +374,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return ForgotPasswordPage();
-                        },
-                        ),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ForgotPasswordPage();
+                            },
+                          ),
                         );
                       },
-                      child: Text('¿Olvidaste tu contraseña?',
-                      style: TextStyle(fontSize: 15),),
+                      child: AutoSizeText(
+                        '¿Olvidaste tu contraseña?',
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
